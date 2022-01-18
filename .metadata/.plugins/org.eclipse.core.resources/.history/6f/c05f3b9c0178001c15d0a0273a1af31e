@@ -1,0 +1,36 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
+
+// Easy Maintenance : 쉬운 유지보수
+
+// 수정이 일어날만한 부분 : 외부파일에 작성한다. (C:\Users\oh971\OneDrive\바탕 화면\m)
+// java 에서 그 외부 파일을 불러서 사용한다.
+public class EMain {
+	public static void main(String[] args) {
+			
+		Scanner k = new Scanner(System.in);
+		
+		try {	
+		
+		System.out.println("구매가격 : ");
+		int price = k.nextInt();
+		
+		// 수정이 자주 발생하는 부분 (외부파일에 빼놓기)
+		// 역슬러쉬는 두개 써야함. 하나 쓸거면 그냥 슬러쉬로
+		FileReader fr = new FileReader("C:\\Users\\oh971\\OneDrive\\바탕 화면\\m\\pointRate.txt");
+		BufferedReader br = new BufferedReader(fr);
+		double pointRate = 0.01;
+		
+		double point = price * pointRate;
+		
+		System.out.printf("적립포인트 : %.1f점", point);
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	
+	}
+}

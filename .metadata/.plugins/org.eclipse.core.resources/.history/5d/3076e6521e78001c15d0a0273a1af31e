@@ -1,0 +1,21 @@
+package com.js.mb;
+
+import java.io.InputStream;
+
+public class Connection {
+	public static void main(String[] args) {
+
+		try {
+			
+			String resource = "org/mybatis/example/mybatis-config.xml";
+			InputStream inputStream = Resources.getResourceAsStream(resource);
+			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		
+	}
+}

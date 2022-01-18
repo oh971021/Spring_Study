@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+// Bad Maintenance
+
+
+public class BMain {
+	public static void main(String[] args) {
+		
+		// 물건을 샀는데 포인트 적립
+		// 구매가격 : 1000 원
+			// 적립 포인트 : 100원 - 10% 적립률
+		
+		Scanner k = new Scanner(System.in);
+		
+		
+		
+		
+		
+		
+		
+	}
+}
