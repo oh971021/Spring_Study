@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper">
+<mapper namespace="jsqqq">
+	
+	<!-- My Batis에서 SQL문을 작성하는 mapper.xml에서의 룰 -->
+	<!-- 1. 세미클론(;)을 사용해선 안된다. -->
+	
+	<!-- select문 resultType까지 확인 -->
+	<select id="getAllCoffee" resultType="com.js.mb.Coffee">
+		select * from coffee2
+	</select>
 
+	<!-- 변수를 sql문에 등록하는 방법 -->
+		<!-- parameterType까지 확인하기 (객체로 넘어온 친구기 때문에 객체를 선택) -->
+	<select id="regCoffee" parameterType="com.js.mb.Coffee">
+		insert into coffee2 values (#{c_name}, #{c_price})
+	</select>
 
+	<!-- 데이터를 수정하는 방법 -->
+		<!-- 파라미터 값을 받아와서 sql문으로 실행한다. (insert와 비슷함) -->
+	<select id="updatePrice" parameterType="com.js.mb.Coffee">
+		update coffee2
+		set c_price = #{c_price}
+		where c_name = #{c_name}
+	</select>
+
+	<!-- 특정 정보 출력하기 -->
+	<select id="getCoffee" resultType="com.js.mb.Coffee">
+		select *
+		from coffee2
+		where c_name like '%' || #{c_name} || '%'
+	</select>
+	
+	<select id="deleteCoffee" parameterType="com.js.mb.Coffee">
+		delete coffee2
+		where c_name = #{c_name}
+	</select>
+	
+	<!-- 객체를 새로운걸 만들기 보다는 map을 활요하는 편이 좋음. -->
+	<select id="updateCoffeePrice" parameterType="map">
+		update coffee2
+		set c_price = #{price2}
+		where c_price >= #{price1}
+	</select>
+	
+	<select id="getCoffeeWherePrice" resultType="com.js.mb.Coffee">
+		select * from coffee2
+		where c_price >= #{c_price}
+	</select>
+	
 </mapper>
