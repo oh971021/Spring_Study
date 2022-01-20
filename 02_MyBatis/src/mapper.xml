@@ -48,4 +48,10 @@
 		where c_price >= #{c_price}
 	</select>
 	
+	<select id="getCoffeePriceToPrice" parameterType="com.js.mb.Price" resultType="com.js.mb.Coffee">
+		select * from coffee2
+		where c_price &gt;= #{price1 } 
+		and c_price &lt;= #{price2 }
+	</select>
+	
 </mapper>
