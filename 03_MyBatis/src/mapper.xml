@@ -6,5 +6,8 @@
 		insert into weather01 values( weather01_seq.nextval, #{w_temp}, #{w_country}, #{w_city}, #{w_description}, sysdate)
 	</insert>
 
+	<select id="getAllWeather" resultType="com.js.mb.Weather">
+		select * from weather01
+	</select>
 	
 </mapper>
