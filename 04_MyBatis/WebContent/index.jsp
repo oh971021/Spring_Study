@@ -10,9 +10,9 @@
 </head>
 <style>
 div {
-	positon: fixed;
+	position: fixed;
 	right: 50px;
-	top: 50op;
+	top: 250px;
 }
 </style>
 <body>

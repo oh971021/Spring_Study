@@ -118,8 +118,6 @@ public class DAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 	public static void updateProduct(HttpServletRequest request) {
@@ -172,7 +170,13 @@ public class DAO {
 			System.out.println(pPrice);
 			System.out.println(pFile);
 			System.out.println(pDate);
-
+			
+			// java.util.date 처리 방식
+			// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd")
+			// Date pDate2 = sdf.parse(pDate)
+			
+			// java.sql.date (같은 이름의 클래스를 이용하면 앞에 패키지경로도 포함 된다.)
+			// java.sql.Date pDate2 = Date.valueOf(pDate);
 			Date pDate2 = Date.valueOf(pDate);
 			
 			Product p = new Product();
