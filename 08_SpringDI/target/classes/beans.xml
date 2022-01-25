@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="d" class="com.js.springdi.Dog"></bean>
+	<bean id="d2" class="com.js.springdi.Dog">
+		<constructor-arg value="초롱"/>
+		<constructor-arg value="3"/>
+	</bean>
+	<!-- 이 친구는 오버로딩 생성자와 같은 역할 -->
+	<bean id="d3" class="com.js.springdi.Dog">
+		<constructor-arg value="초코"/>
+		<constructor-arg value="1"/>
+	</bean>
+	<!-- 얘는 세터와 같은 역할 -->
+	<bean id="d4" class="com.js.springdi.Dog">
+		<property name="age" value="1"></property>
+		<property name="name" value="요미"></property>
+	</bean>
+
+	<!-- ################################ -->
+	
+	<bean id="js" class="com.js.springdi.Human">
+		<constructor-arg value="준석"/>
+		<constructor-arg value="26"/>
+		<constructor-arg value="190"/>
+		<constructor-arg value="85"/>
+	</bean>
+	
+	<bean id="dc" class="com.js.springdi.Human">
+		<property name="weight" value="75"/>
+		<property name="age" value="26"/>
+		<property name="height" value="180"/>
+		<property name="name" value="동찬"/>
+	</bean>
+
+	<!-- ################################ -->
+	
+	<bean id="c" class="com.js.springdi.Coffee">
+		<constructor-arg>
+			<list>
+				<value>원두</value>
+				<value>우유</value>
+				<value>바닐라시럽</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<map key-type="java.lang.String" value-type="java.lang.Double">
+				<entry key="탄" value="10"></entry>
+				<entry key="단" value="50"></entry>
+				<entry key="지" value="5"></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<!-- ################################ -->
+	
+	<bean id="cat" class="com.js.springdi.Cat">
+		<constructor-arg ref="catMaster"></constructor-arg>
+	</bean>
+	
+	<bean id="catMaster" class="com.js.springdi.Human">
+		<constructor-arg value="솔리"/>
+		<constructor-arg value="20"/>
+		<constructor-arg value="170"/>
+		<constructor-arg value="45"/>
+	</bean>
+
+</beans>
