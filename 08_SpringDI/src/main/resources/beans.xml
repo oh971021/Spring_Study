@@ -74,7 +74,11 @@
 	<context:annotation-config></context:annotation-config>
 	
 	<bean id="tum" class="com.js.springdi.Tumbler">
-		<constructor-arg ref="tumOwner"></constructor-arg>
+		<!-- <constructor-arg ref="tumOwner"></constructor-arg> -->
+	</bean>
+	
+	<bean id="tum2" class="com.js.springdi.Tumbler2">
+		
 	</bean>
 	
 	<bean id="tumOwner" class="com.js.springdi.Human2">

@@ -26,6 +26,12 @@ public class SDIMain2 {
 		System.out.print("텀블러 주인 : ");
 		t1.info();
 		
+		System.out.println("==============");
+
+		Tumbler2 t2 = aac.getBean("tum2", Tumbler2.class);
+		System.out.print("텀블러 주인 : ");
+		t2.info();
+		
 	}
 
 }
