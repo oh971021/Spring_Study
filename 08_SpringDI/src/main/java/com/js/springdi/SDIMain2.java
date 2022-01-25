@@ -20,6 +20,12 @@ public class SDIMain2 {
 		// dlbf가 객체를 불러올 때 딱 생성 해주기 때문에 더 좋은 방식이지만
 		// Spring의 어떤 기능들에서는 aac방식을 '반드시' 써야만 하는 경우가 꽤 있다.
 		
+		System.out.println("==============");
+		
+		Tumbler t1 = aac.getBean("tum", Tumbler.class);
+		System.out.print("텀블러 주인 : ");
+		t1.info();
+		
 	}
 
 }
