@@ -49,7 +49,19 @@ public class HomeController {
 	@RequestMapping(value="item.puchase")
 	public String purchase(Data2 d, Model model) {
 		Calc.mul(d, model);
-		
+
+		return "output";
+	}
+	
+	// 11_SpringMVC
+	
+	// v = x,y 입력 받고 버튼 누르면
+	// calc.do
+	// 모델(M)거쳐서 결과 페이지에 +,- 결과 값 출력
+	
+	@RequestMapping(value="calc.do2")
+	public String calcdo(Data3 d, Model m) {
+		Calc.add(d, m);
 		
 		return "output";
 	}
