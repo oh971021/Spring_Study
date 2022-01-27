@@ -63,6 +63,11 @@ public class MDAO {
 
 		System.out.println(m.getM_name());
 		System.out.println(m.getM_price());
+/*
+		if (m.getM_name() != "") {
+			m.getM_name() = Null
+		}
+*/
 /*		
 		int result = 0;
 		
