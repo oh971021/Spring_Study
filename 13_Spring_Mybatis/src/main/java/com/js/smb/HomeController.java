@@ -47,6 +47,44 @@ public class HomeController {
 		return "select";
 	}
 	
+	@RequestMapping(value="/menu.del.do", method = RequestMethod.GET)
+	public String delMenuDo(Menu m, HttpServletRequest req) {
+		
+		mDAO.delMenu(m, req);
+		mDAO.getAllMenu(req);
+		
+		return "select";
+	}
 	
+	@RequestMapping(value="/menu.update.do", method = RequestMethod.GET)
+	public String updateMenu(Menu m, HttpServletRequest req) {
+		
+		mDAO.updateMenu(m, req);
+		mDAO.getAllMenu(req);
+		
+		return "select";
+	}
 	
+	@RequestMapping(value="/menu.modi.go", method = RequestMethod.GET)
+	public String domiMenuGo() {
+		
+		return "update";
+	}
+	
+	@RequestMapping(value="/menu.modi.do", method = RequestMethod.GET)
+	public String domiMenuDO(Menu m, HttpServletRequest req) {
+
+		mDAO.updateMenu(m, req);
+		mDAO.getAllMenu(req);
+		
+		return "select";
+	}
+	
+	@RequestMapping(value="/menu.detail.go", method = RequestMethod.GET)
+	public String detailGo(Menu m, HttpServletRequest req) {
+		
+		mDAO.getMenu(m, req);
+		
+		return "detail";
+	}
 }

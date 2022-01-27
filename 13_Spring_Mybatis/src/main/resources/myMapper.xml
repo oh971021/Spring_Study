@@ -9,5 +9,43 @@
 	<insert id="regMenu" parameterType="com.js.smb.Menu">
 		insert into menu01 values(menu01_seq.nextval, #{m_name}, #{m_price})
 	</insert>
+	
+	<delete id="delMenu" parameterType="com.js.smb.Menu">
+		delete menu01 where m_no = #{m_no}
+	</delete>
+	
+	<select id="getMenu" parameterType="com.js.smb.Menu" resultType="com.js.smb.Menu">
+		select * from menu01 where m_no = #{m_no }
+	</select>
+	
+<!-- 
+	<update id="updateMenu" parameterType="com.js.smb.Menu">
+		update menu01 set m_price = #{m_price} where m_no = #{m_no}
+	</update>
+ -->	
+ 	
+ 	<update id="updateMenu" parameterType="com.js.smb.Menu">
+		update menu01 
+		<set>
+			<if test="m_name != ''">
+			m_name = #{m_name}
+			</if>
+			<if test="m_name != '' and m_price != null">
+			,
+			</if>
+			<if test="m_price != null">
+			m_price = #{m_price}
+			</if>
+		</set>
+		where m_no = #{m_no}
+	</update>
+	
+<!-- 
+	<update id="updateMenu2" parameterType="com.js.smb.Menu">
+		update menu01 
+		set m_name = #{m_name}, m_price = #{m_price} 
+		where m_no = #{m_no}
+	</update> 
+-->
 
 </mapper>
