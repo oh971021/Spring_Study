@@ -27,7 +27,7 @@
  	<update id="updateMenu" parameterType="com.js.smb.Menu">
 		update menu01 
 		<set>
-			<if test="m_name != ''">
+			<if test="m_name != '' and m_name != null">
 			m_name = #{m_name}
 			</if>
 			<if test="m_name != '' and m_price != null">
