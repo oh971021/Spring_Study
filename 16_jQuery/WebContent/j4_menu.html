@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">	
+	$(function() {
+		let t1Visible = false;
+		
+		$('#b1').click(function(){
+			if(t1Visible) {
+				$('#t1').css('left', '-80px');
+			} else {
+				$('#t1').css('left', '5px');
+			}
+			t1Visible = !t1Visible;
+		});
+		
+		$('#b2').click(function(){
+			if(t1Visible) {
+				$('#t2').css('opacity', '0');
+			} else {
+				$('#t2').css('opacity', '1');
+			}
+			t1Visible = !t1Visible;		
+		});
+		
+		$('#b3').click(function(){
+			if(t1Visible) {
+				$('#t3').css('visibility', 'visible');
+			} else {
+				$('#t3').css('visibility', 'hidden');
+			}
+			t1Visible = !t1Visible;		
+		});
+		
+	});
+</script>
+<style type="text/css">
+	#t1 { position: fixed; left: -80px; transition: all 0.2s ease-out; }
+	#t2 { opacity: 0; transition: all 0.2s ease-out; }
+	#t3 { visibility: visible; }
+</style>
+</head>
+<body>
+	<button id="b1">메뉴</button>
+	<table border="1" id="t1">
+		<tr><td><a href="">구글로</a></td></tr>
+		<tr><td><a href="">네이버로</a></td></tr>
+		<tr><td><a href="">다음으로</a></td></tr>
+	</table>
+	
+ 	<button id="b2">메뉴</button>
+	<table border="1" id="t2">
+		<tr><td><a href="">구글로</a></td></tr>
+		<tr><td><a href="">네이버로</a></td></tr>
+		<tr><td><a href="">다음으로</a></td></tr>
+	</table>
+	
+	<button id="b3">메뉴</button>
+	<table border="1" id="t3">
+		<tr><td><a href="">구글로</a></td></tr>
+		<tr><td><a href="">네이버로</a></td></tr>
+		<tr><td><a href="">다음으로</a></td></tr>
+	</table>
+</body>
+</html>

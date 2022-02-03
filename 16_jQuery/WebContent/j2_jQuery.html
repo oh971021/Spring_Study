@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+	// validCheck.js : 유효성 검사 라이브러리
+					// 가져다 쓰면 편함
+					
+	// jQuery.js : JS 전반 관련해서 함수 정리
+				// js 할 때, jQuery 쓰면 편함 
+</script>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+
+	// jQuery(선택자).이벤트(콜백함수);
+		// JS내장 객체, "css 선택자"
+	// js의 onload
+
+/* 	jQuery(document).ready(function() {
+		alert('ㅋㅋㅋ')
+	}); */
+	
+/* 	$(document).ready(function(){
+		alert('ㅎㅎ');
+	}); */
+
+	// callback 함수
+		// 이벤트에 연결이 되어서 그 이벤트가 발생하면 자동으로 호출
+	// $로 jQeury 단어 대체 가능, 콜백함수는 이름이 필요없으면 생략 가능함
+		// 이게 main
+	$(function(){
+		let h = $("#h");
+		alert(h);
+	
+		$("button").click(function(){
+			alert('와우!')
+		});
+	
+	});
+
+</script>
+<body>
+	<h1 id="h">ㅋㅋ</h1>
+	<button>ㅎㅎ1</button>
+	<button>ㅎㅎ2</button>
+	<button>ㅎㅎ3</button>
+	<button>ㅎㅎ4</button>
+</body>
+</html>
