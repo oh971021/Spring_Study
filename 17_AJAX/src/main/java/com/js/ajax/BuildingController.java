@@ -29,4 +29,11 @@ public class BuildingController {
 		return bDAO.getAllshop();
 		
 	}
+	
+	@RequestMapping(value = "/shop.search", method = RequestMethod.GET,
+			produces = "application/json; charset=utf-8")
+	public @ResponseBody Building shopSearch(FloorSeletor fs) {
+		
+		return bDAO.searchShop(fs); 		
+	}
 }

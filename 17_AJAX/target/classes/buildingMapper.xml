@@ -3,7 +3,12 @@
 <mapper namespace="com.js.ajax.BuildingMapper">
 
 	<select id="getAllshop" resultType="com.js.ajax.Shop">
-		select * from building order by b_floor desc
+		select * from building order by b_floor
+	</select>
+	
+	<select id="searchShop" parameterType="com.js.ajax.FloorSeletor" resultType="com.js.ajax.Shop">
+		select * from building 
+		where b_floor &gt;= #{start} and b_floor &lt;= #{end}
 	</select>
 
 </mapper>

@@ -11,23 +11,40 @@
 	$(function(){
 		
 		$('#btn').click(function(){
+		// $('input').keyup(function(){
+			// 인풋 파라미터값 받기 .val()
+			let start = $('#start').val();
+			let end = $('#end').val();
 			
 			// $.getJSON(url, callback)
 				// 자바에서 static 메서드아 유사하고, jQuery에서는 전역 메소드라고 한다.
-			$.getJSON("/ajax/shop.getjson", function(j){
-				// console.log(j);
+			$.getJSON("http://localhost/ajax/shop.search?start="+start+"&end="+end, function(j){
+				$('table').empty();
+				console.log(j); // 제이슨 오브젝트를 보여줌
+				// console.log(JSON.stringify(j)); // 제이슨 전체를 보여줌
 				
 				// 반복문으로 json 값 읽기
 					// 복습 : $.each(배열), callback(인덱스, 객체)
 				$.each(j.shop, function(i, s){
-					console.log(s);
+					// console.log(s);
+					let td1 = $("<td></td>").text(s.b_floor);
+					let td2 = $("<td></td>").text(s.b_shopName);
+										// DOM안에 더해주는 기능 : append
+					let tr = $("<tr></tr>").append(td1,td2);		
+							// table 태그 안에 tr을 넣는다.
+					$('table').append(tr);
 				});
 				
-			})
-			
+				$('input').keyup(function(){
+					start = $('#start').val();
+					end = $('#end').val();
+				
+					if(start.length >= 1 && end.length >= 1) {
+						$('#btn').trigger('click');
+					};
+				});
+			});
 		});
-		
-		
 	});
 </script>
 
@@ -51,7 +68,21 @@
 
 	<button onclick="location.href='/ajax/shop.getxml'">xml 얻기</button>
 	
-	<button id="btn">확인</button>
+	<hr>
+	
+	<input name="start" id="start">
+	<input name="end" id="end">
+	<button id="btn">찾기</button>
+	
+	<hr>
+	
+	<p>
+	<table border="1">
+		
+	</table>
+	</p>
+	
+	<hr>
 	
 </body>
 </html>

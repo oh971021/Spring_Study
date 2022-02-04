@@ -16,4 +16,11 @@ public class BuildingDAO {
 		return new Building(ss.getMapper(BuildingMapper.class).getAllshop());
 	}
 
+	public Building searchShop(FloorSeletor fs) {
+		// TODO Auto-generated method stub
+		
+		return new Building(ss.getMapper(BuildingMapper.class).searchShop(fs));
+		
+	}
+
 }

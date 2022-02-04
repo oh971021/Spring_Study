@@ -13,3 +13,5 @@ insert into building values (building_seq.nextval, '학원');
 insert into building values (building_seq.nextval, '병원');
 
 select * from building;
+
+select * from building where b_floor >= 1 and b_floor <= 2;
