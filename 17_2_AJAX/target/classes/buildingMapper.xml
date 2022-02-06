@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.js.ajax.BuildingMapper">
+
+	<!-- Interface의 추상메소드명과 Mapper의 id명을 동일하게 만들어준다. (스프링 자동매핑) -->
+	<select id="getAllShop" resultType="com.js.ajax.Shop">
+		select * from building order by b_floor
+	</select>
+
+	<select id="searchShop" parameterType="com.js.ajax.FloorSelector" resultType="com.js.ajax.Shop">
+		select * from building where b_floor &gt;= #{start} and b_floor &lt;= #{end}
+	</select>
+
+</mapper>
