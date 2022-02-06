@@ -11,34 +11,38 @@
 $(function(){
 	
 	// 버튼을 누르면 ajax를 실행함
-	$('button').click(function(){
+	//$('button').click(function(){
+	$('#i1').keyup(function(){
 		// 버튼 클릭 시 인풋값 가져옴
 		let inputVal = $('#i1').val();
 		
-		// jQuery ajax 메소드의  통합적인 기능을 가지고 있다.
-		$.ajax({
-			
-			// 서버로 요청 할 주소
-			url : "/ajax/menu.get.json.name",
-			// 요청 타입
-			type : 'GET',
-			// 요청 할 형식 (어떤 파일로 받을 지)
-			dataType : 'json',
-			// 전송 할 데이터를 뜻함 (Parameter)
-			data : {
-				"m_name" : inputVal // 파라미터를 전송한다 
-			},
-			// 요청한 주소로 응답이 성공하면 success를 실행시킨다.
-			success : function(data){
-				$('#mainTbl').empty();
+		if($('#i1').val() != "") {
+		
+			// jQuery ajax 메소드의  통합적인 기능을 가지고 있다.
+			$.ajax({
 				
-				console.log(data);
+				// 서버로 요청 할 주소
+				url : "/ajax/menu.get.json.name",
+				// 요청 타입
+				type : 'GET',
+				// 요청 할 형식 (어떤 파일로 받을 지)
+				dataType : 'json',
+				// 전송 할 데이터를 뜻함 (Parameter)
+				data : {
+					"m_name" : inputVal // 파라미터를 전송한다 
+				},
+				// 요청한 주소로 응답이 성공하면 success를 실행시킨다.
+				success : function(data){
+					$('#mainTbl').empty();
+					
+					console.log(data);
+					
+					// 우리가 따로 만드는 메소드 : 가서 파싱하기 위해 데이터를 넘겨준다.
+					successcall(data);
+				}
 				
-				// 우리가 따로 만드는 메소드 : 가서 파싱하기 위해 데이터를 넘겨준다.
-				successcall(data);
-			}
-			
-		});
+			});
+		}
 	});
 });
 
