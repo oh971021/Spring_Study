@@ -57,8 +57,8 @@ $(function(){
 				},
 				success : function(data){
 					$('#mainTbl').empty();
-					console.log(data);
-					//successcall2(data);
+					//console.log(data);
+					successcall2(data);
 				}
 			});
 		}
@@ -67,7 +67,7 @@ $(function(){
 
 function successcall(data) {
 	
-	data = data["menus"];
+	data = data["menus"];	// JSON 객체 접근법
 
 	$.each(data, function(i,d){
 		// console.log(data[i]);
@@ -78,6 +78,23 @@ function successcall(data) {
 		$('#td'+i).text(d.m_name);
 	})
 	
+}
+
+function successcall2(data) {
+	
+	data = $(data).find('menus');	// XML 객체 접근법
+	console.log(data);
+	
+	$.each(data, function(i,d){
+		
+		console.log(data[i]);	
+	
+		let name = $(this).find('m_name').text();
+		// console.log(name);
+		
+		$('#mainTbl').append("<tr><td>"+ name +"</td></tr>");
+		//$('#td'+i).text(d.m_name);
+	})
 }
 
 </script>
