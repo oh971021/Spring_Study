@@ -30,7 +30,7 @@ $(function(){
 	
 	// "https://dapi.kakao.com/v2/local/search/keyword.json?"
 		
-							// e : event (발생했을 때를 의미한 객체로 사용함) 
+							// e : event (발생했을 때를 의미한 객체로 사용함) (그냥 임의로 설정한 객체명)
 	$('#search').keyup(function(e){
 					// Enter : 13
 		if(e.keyCode == 13) {
@@ -47,8 +47,36 @@ $(function(){
 				beforeSend : function(req) { // Request Header에 보내줘야하는 인증키로 요청
 					req.setRequestHeader("Authorization", "KakaoAK 2ce77ed44e866b3608bbf80d82e99d84")
 				},
+								// 요청이 성공해야 나오는 파라미터 네임 (result : 결과값이 임의로 설정한 객체에 담긴다) (이거도 임의로 설정한 객체명)
 				success : function(result) { // 이 keyup이 잘 작동하게 된다면 success를 실행시킨다.
 					console.log(result);
+					console.log(JSON.stringify(result)); // 겟방식으로 읽어온 모든 JSON 파일을 펼쳐줌		
+					
+					// 지도 이동시킬 때 사용할 축 값 초기화
+					let newY = 0;
+					let newX = 0;
+					
+					// 검색어를 입력했을 때, 결과물 중 가장 처음 나온 결과물을 기준으로 위치를 이동시켜보자.
+					newY = result.documents[0].y;
+					newX = result.documents[0].x;
+					
+					// JSON 으로 가져온 데이터 가져오기 (x,y 필요)
+					$.each(result.documents, function(i, l){
+						console.log(l.place_name)
+						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+							map : map,	// 마커를 표시할 지도 (현재 우리가 사용중인 파라미터 map으로 들어오는 div 박스를 사용함)
+						    position: new kakao.maps.LatLng(l.y, l.x)
+														// 
+						});
+					});
+					
+				    // 지도 이동시키기
+				    	// 이동할 위도 경도 위치를 불려옴
+				    var moveLatLon = new kakao.maps.LatLng(newY, newX);
+				    	// 지도 중심을 이동 시킵니다
+				    map.setCenter(moveLatLon);
+				    
 				}
 			});
 		};
