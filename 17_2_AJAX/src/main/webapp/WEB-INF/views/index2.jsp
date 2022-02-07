@@ -44,6 +44,25 @@ $(function(){
 			});
 		}
 	});
+	
+	$('#b2').click(function(){
+		let inputVal = $('#i2').val();
+		if($('#i2').val() != "") {
+			$.ajax({
+				url : "/ajax/menu.get.xml.name",
+				type : 'GET',
+				dataType : 'xml',
+				data : {
+					"m_name" : inputVal 
+				},
+				success : function(data){
+					$('#mainTbl').empty();
+					console.log(data);
+					//successcall2(data);
+				}
+			});
+		}
+	});
 });
 
 function successcall(data) {
@@ -67,6 +86,9 @@ function successcall(data) {
 	<input id="i1" autocomplete="off" placeholder="메뉴명 검색">
 	<button>확인</button>
 
+	<input id="i2" autocomplete="off" placeholder="메뉴명 검색">
+	<button id="b2">확인</button>
+	
 	<hr>
 	
 	<table id="mainTbl">
