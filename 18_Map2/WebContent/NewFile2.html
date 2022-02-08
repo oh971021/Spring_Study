@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript"
+   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=877c4ff831fb4fe8733e0de0bca014e3"></script>
+<script type="text/javascript">
+
+if(navigator.geolocation) {
+    
+    navigator.geolocation.getCurrentPosition(function(position) {
+        
+        // 위치를 가져오는데 성공할 경우
+        $.each(position.coords, function(key, item) {
+            jQuery("<h3></h3>").html("● " + key + " : " + item).appendTo("body");
+        });
+        // 위도 경도
+        alert(position.coords.latitude);
+        alert(position.coords.longitude);
+    }, function(error) {
+        
+        // 위치를 가져오는데 실패한 경우
+        consol.log(error.message);
+    });
+} else {
+    consol.log("Geolocation을 지원하지 않는 브라우저 입니다.");
+}
+
+$(function(){
+   
+// *****지도 생성하기  ********
+   var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+   var options = { //지도를 생성할 때 필요한 기본 옵션
+      center : new kakao.maps.LatLng(35.83713046222643, 128.57067999691137), //지도의 중심좌표(y,x).
+      level : 5 //지도의 레벨(확대, 축소 정도)
+   };
+
+   var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+   
+ // *****로드뷰 생성하기  ********
+   var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+   var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+   var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+   var position = new kakao.maps.LatLng(35.83713046222643, 128.57067999691137);
+
+   // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+   roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+       roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+   });
+   
+   
+   // "https://dapi.kakao.com/v2/local/search/keyword.json?"
+      
+                     // e : event (발생했을 때를 의미한 객체로 사용함) (그냥 임의로 설정한 객체명)
+   $('#search').keyup(function(e){
+               // (키코드)Enter : 13
+      if(e.keyCode == 13) {
+         let search = $(this).val();
+         
+         $.ajax({
+            url : "https://dapi.kakao.com/v2/local/search/keyword.json?",
+            data : {   // 파라미터 작성
+               query : search,
+               x : 35.83713046222643,
+               y : 128.57067999691137,
+               radius : 5000
+            },
+            beforeSend : function(req) { // Request Header에 보내줘야하는 인증키로 요청
+               req.setRequestHeader("Authorization", "KakaoAK 2ce77ed44e866b3608bbf80d82e99d84")
+            },
+                        // 요청이 성공해야 나오는 파라미터 네임 (result : 결과값이 임의로 설정한 객체에 담긴다) (이거도 임의로 설정한 객체명)
+            success : function(result) { // 이 keyup이 잘 작동하게 된다면 success를 실행시킨다.
+               console.log(result);
+               console.log(JSON.stringify(result)); // 겟방식으로 읽어온 모든 JSON 파일을 펼쳐줌      
+               
+               // 지도 이동시킬 때 사용할 축 값 초기화
+               let newY = 0;
+               let newX = 0;
+               
+               // 검색어를 입력했을 때, 결과물 중 가장 처음 나온 결과물을 기준으로 위치를 이동시켜보자.
+               newY = result.documents[0].y;
+               newX = result.documents[0].x;
+               
+               // JSON 으로 가져온 데이터 가져오기 (x,y 필요)
+               $.each(result.documents, function(i, l){
+                  console.log(l.place_name)
+                  // 마커를 생성합니다
+                  var marker = new kakao.maps.Marker({
+                     map : map,   // 마커를 표시할 지도 (현재 우리가 사용중인 파라미터 map으로 들어오는 div 박스를 사용함)
+                      position: new kakao.maps.LatLng(l.y, l.x)  
+                  });
+                  // 마커에 클릭이벤트를 등록합니다
+                  kakao.maps.event.addListener(marker, 'click', function() {
+                        // 마커 위에 인포윈도우를 표시합니다
+                        infowindow.open(map, marker);  
+                        $("#markerInfo").text(l.place_name);
+                  });
+               });
+               
+                // 지도 이동시키기
+                   // 이동할 위도 경도 위치를 불려옴
+                var moveLatLon = new kakao.maps.LatLng(newY, newX);
+                   // 지도 중심을 이동 시킵니다
+                map.setCenter(moveLatLon);
+                   
+                // 검색한 곳에서 로드뷰 리로드. 좌표값 받아서 panoID 재설정   
+                roadviewClient.getNearestPanoId(moveLatLon, 50, function(panoId) {
+                    roadview.setPanoId(panoId, moveLatLon); //panoId와 중심좌표를 통해 로드뷰 실행
+                });
+                
+                var iwContent = '<div style="padding:5px;" id="markerInfo">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+                
+                var infowindow = new kakao.maps.InfoWindow({
+                    content : iwContent,
+                    removable : iwRemoveable
+                });
+                
+
+                
+            }
+         });
+      };
+   });
+});
+</script>
+</head>
+<body>
+   <input placeholder="검색" id="search">
+   
+   <hr>
+   
+   <div id="map" style="width: 500px; height: 400px;"></div>
+   <div id="roadview" style="width: 100%; height: 300px;"></div>
+</body>
+</html>
