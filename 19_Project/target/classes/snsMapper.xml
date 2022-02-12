@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.js.pj.sns.SNSMapper">
+	<select id="getMsgCount" parameterType="com.js.pj.sns.SNSSelector" resultType="java.lang.Integer">
+		select count(*)
+		from pj_sns, pj_member
+		where s_owner = m_id
+		and s_txt like '%'||#{search}||'%'	<!-- 서치부분에 ""이 들어오면 전부다 조회한다. -->
+	</select>
+	
+	<select id="getMsg" resultType="com.js.pj.sns.SNSMsg" parameterType="SNSSelector">
+			select *
+			from (
+				select rownum as rn, s_no, s_owner, s_txt, s_date, m_photo
+				from (
+					select * from pj_sns, pj_member
+					where s_owner = m_id and s_txt like '%'||#{search}||'%'
+					order by s_date desc
+				)
+			)
+			where rn &gt;= #{start} and rn &lt;= #{end}
+	</select>
+
+	<select id="getReply"	parameterType="com.js.pj.sns.SNSMsg"	resultType="com.js.pj.sns.SNSReply">
+		select *
+		from pj_sns_reply
+		where r_s_no = #{s_no}
+	</select>
+
+
+</mapper>
