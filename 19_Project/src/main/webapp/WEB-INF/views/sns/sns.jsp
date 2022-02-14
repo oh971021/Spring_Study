@@ -10,11 +10,32 @@
 </head>
 <body>
 
+<!-- 검색 -->
+<form action="sns.search" name="snsSearchForm" onsubmit="return snsSearchCheck();">
+	<table id="snsSearchArea">
+		<tr>
+			<td id="ssaTd1"><input name="search" maxlength="10" autocomplete="off"></td>
+			<td id="ssaTd2"><button>검색</button></td>
+			<td><img id="snsSearchFormSummoner" src="resources/img/search.png"></td>
+		</tr>
+	</table>
+</form>
+<!-- //검색 -->
+
+<!-- 페이징 처리 -->
+<c:if test="${curPage != 1 }">
+	<a href="sns.page.change?p=${curPage - 1 }" id="snsL">&lt;</a>
+</c:if>
+<c:if test="${curPage != pageCount }">
+	<a href="sns.page.change?p=${curPage + 1 }" id="snsR">&gt;</a>
+</c:if>
+<!-- //페이징 처리 -->
+
 <c:forEach var="m" items="${msgs }">
 	<table class="aSNSMsg">
 		<tr>
 		<td class="asmImgTd" align="center" valign="top" rowspan="4">
-				<img src="resources/img/${m.m_photo }">
+				<img src="resources/file/${m.m_photo }">
 			</td>
 		
 			<td class="asmOwner">${m.s_owner }</td>
@@ -50,9 +71,6 @@
 			</td>
 		</tr>
 		
-		
-		
-		
 		<c:if test="${m.s_owner == sessionScope.loginMember.m_id }">			
 			<tr>
 				<td colspan="2" align="right">
@@ -63,6 +81,32 @@
 		</c:if>
 	</table>	
 </c:forEach>
+	
+<!-- 로그인한 사람만 쓸 수 있게 (게시글 등록) -->
+<c:if test="${sessionScope.loginMember != null }">
+	<table id="snsWriteArea" style="bottom: -150px">
+		<tr>
+			<td align="center"><span id="snsWriteFormSummoner"> <img
+					src="resources/img/write.png"
+					style="background-color: #000000BF; border-radius: 10px; padding: 5px;">
+			</span></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<form name="snsWriteForm" action="sns.write" method="post">
+					<input name="token" type="hidden" value="${token }">
+					<table id="snsWriteTable">
+						<tr>
+							<td id="swtTd1"><textarea name="s_txt" maxlength="200"></textarea></td>
+							<td id="swtTd2"><button>쓰기</button></td>
+						</tr>
+					</table>
+				</form>
+
+			</td>
+		</tr>
+	</table>
+</c:if>
 	
 
 </body>

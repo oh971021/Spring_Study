@@ -55,10 +55,52 @@ function connectMenuSummonEvent() {
 	});
 }
 
-// jQuery 메소드 부르기 위해 Ready 시킴
+function connectSNSWriteFormSummonEvent() {
+	var snsWriteFormVisible = false;
+
+	$("#snsWriteFormSummoner").click(function() {
+		if (snsWriteFormVisible) {
+			$("#snsWriteArea").css("bottom", "-150px");
+		} else {
+			$("#snsWriteArea").css("bottom", "10px");
+		}
+		snsWriteFormVisible = !snsWriteFormVisible;
+	});
+}
+
+function connectSNSSearchFormSummonEvent() {
+	var snsSearchFormVisible = false;
+
+	$("#snsSearchFormSummoner").click(function() {
+		if (snsSearchFormVisible) {
+			$("#snsSearchArea").css("left", "-239px");
+		} else {
+			$("#snsSearchArea").css("left", "20px");
+		}
+		snsSearchFormVisible = !snsSearchFormVisible;
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//jQuery 메소드 부르기 위해 Ready 시킴
 $(function(){
 	connectAddrSearchEvent();
 	connectShowWeatherEvent();
 	showAqicn();
 	connectMenuSummonEvent();
+	connectSNSWriteFormSummonEvent();
+	connectSNSSearchFormSummonEvent();
 });

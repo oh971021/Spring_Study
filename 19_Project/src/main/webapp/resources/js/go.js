@@ -72,14 +72,13 @@ function sendCommunityMsg(to) {
 
 
 
-
-function logout2(){
-	let ok = confirm('로그아웃 하시겠습니까?');
-	if(ok){
-		location.href='https://kauth.kakao.com/oauth/logout?client_id=3329760d3806e669eb2fc2fe665d6bba&logout_redirect_uri=http://localhost/pj/kakao.logout';
-	}
-	
-}
+// 카카오 로그인
+//function logout2(){
+//	let ok = confirm('로그아웃 하시겠습니까?');
+//	if(ok){
+//		location.href='https://kauth.kakao.com/oauth/logout?client_id=3329760d3806e669eb2fc2fe665d6bba&logout_redirect_uri=http://localhost/pj/kakao.logout';
+//	}	
+//}
 
 
 

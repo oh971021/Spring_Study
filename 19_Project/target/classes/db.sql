@@ -10,6 +10,8 @@ insert into pj_member values('js', '1', '1', '1', '1');
 
 select * from pj_member;
 
+delete pj_member;
+
 --------------------------------------------------------
 -- 컨셉차이 (계정 삭제하면 글도 삭제되는 것)
 	-- 만약 컨셉을 걸거면 위배사항 있는지 확인 (주의사항)
@@ -27,6 +29,8 @@ s_txt varchar2(300 char) not null,
 s_date date not null
 );
 
+delete pj_sns;
+
 create sequence pj_sns_seq;
 
 insert into pj_sns values (pj_sns_seq.nextval, 'js', 'text~', sysdate);
@@ -41,6 +45,8 @@ insert into pj_sns_reply values (101, 200, 'js', 'oh my god..;;', sysdate);
 insert into pj_sns_reply values (102, 1, 'sr', 'ppup..', sysdate);
 
 select * from pj_sns_reply;
+
+
 
 --------------------------------------------------------
 
@@ -61,4 +67,4 @@ create table pj_sns_reply(
 
 create sequence pj_sns_reply_seq;
 
-
+delete pj_sns_reply;

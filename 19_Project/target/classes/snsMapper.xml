@@ -27,5 +27,50 @@
 		where r_s_no = #{s_no}
 	</select>
 
+	<!-- 메세지 쓰는거 -->
+	<insert id="writeMsg" parameterType="com.js.pj.sns.SNSMsg">
+		insert into pj_sns values(pj_sns_seq.nextval, #{s_owner}, #{s_txt}, sysdate)
+	</insert>
+
+	<!-- 댓글 쓰는기능 -->
+	<insert id="writeReply"	parameterType="com.js.pj.sns.SNSReply">
+		insert into pj_sns_reply
+		values(pj_sns_reply_seq.nextval,
+		#{r_s_no}, #{r_owner},
+		#{r_txt}, sysdate)
+	</insert>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteMsg"
+		parameterType="com.js.pj.sns.SNSMsg">
+		delete from pj_sns
+		where s_no = #{s_no}
+	</delete>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply"
+		parameterType="com.js.pj.sns.SNSReply">
+		delete from pj_sns_reply
+		where r_no = #{r_no}
+	</delete>
+
+	<!-- 글 수정 -->
+	<update id="updateMsg"
+		parameterType="com.js.pj.sns.SNSMsg">
+		update pj_sns
+		set s_txt = #{s_txt}
+		where s_no = #{s_no}
+	</update>
+
+	<!-- 로그인한 사람이 남긴 게시글 카운트 -->
+		<!-- 회원 탈퇴할 때, 그 사람이 쓴 게시글 삭제하기 위해서 사용 -->
+	<select id="getMsgCountByOwner"
+		parameterType="com.js.pj.member.Member"
+		resultType="java.lang.Integer">
+		select count(*)
+		from pj_sns
+		where s_owner = #{m_id}
+	</select>
+
 
 </mapper>

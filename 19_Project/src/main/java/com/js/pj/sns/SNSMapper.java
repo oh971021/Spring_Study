@@ -2,6 +2,8 @@ package com.js.pj.sns;
 
 import java.util.List;
 
+import com.js.pj.member.Member;
+
 public interface SNSMapper {
 
 	int getMsgCount(SNSSelector sSel);
@@ -9,5 +11,17 @@ public interface SNSMapper {
 	List<SNSMsg> getMsg(SNSSelector search);
 
 	List<SNSReply> getReply(SNSMsg snsMsg);
+
+	public abstract int updateMsg(SNSMsg sm);
+
+	public abstract int writeMsg(SNSMsg sm);
+	
+	public abstract int writeReply(SNSReply sr);
+
+	public abstract int deleteMsg(SNSMsg sm);
+	
+	public abstract int deleteReply(SNSReply sr);
+
+	public abstract Integer getMsgCountByOwner(Member m);
 
 }
