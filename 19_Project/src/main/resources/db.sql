@@ -68,3 +68,29 @@ create table pj_sns_reply(
 create sequence pj_sns_reply_seq;
 
 delete pj_sns_reply;
+
+---------------------------------------------------------------
+
+create table pj_dataroom(
+	d_no number(5) primary key, 			
+	d_owner varchar2(10 char) not null,
+	d_title varchar2(25 char) not null, 
+	d_file varchar2(200 char) not null,
+	d_category char(6 char) not null
+);
+
+create sequence pj_dataroom_seq;
+select * from pj_dataroom;
+
+----------------------------------------------------------------
+
+create table pj_gallery(
+	g_no number(5) primary key, 			
+	g_owner varchar2(10 char) not null,
+	g_title varchar2(25 char) not null, 
+	g_file varchar2(200 char) not null
+);
+create sequence pj_gallery_seq;
+
+select * from pj_gallery;
+

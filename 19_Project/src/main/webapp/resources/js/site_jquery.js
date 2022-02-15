@@ -81,6 +81,18 @@ function connectSNSSearchFormSummonEvent() {
 	});
 }
 
+function connectDRUploadFormSummonEvent() {
+	var drUploadFormVisible = false;
+
+	$("#drUploadFormSummoner").click(function() {
+		if (drUploadFormVisible) {
+			$("#drUploadArea").css("bottom", "-70px");
+		} else {
+			$("#drUploadArea").css("bottom", "10px");
+		}
+		drUploadFormVisible = !drUploadFormVisible;
+	});
+}
 
 
 
@@ -103,4 +115,5 @@ $(function(){
 	connectMenuSummonEvent();
 	connectSNSWriteFormSummonEvent();
 	connectSNSSearchFormSummonEvent();
+	connectDRUploadFormSummonEvent()
 });
