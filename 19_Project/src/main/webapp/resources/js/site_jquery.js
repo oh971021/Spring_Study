@@ -94,6 +94,18 @@ function connectDRUploadFormSummonEvent() {
 	});
 }
 
+function connectCommunityMemberSummonEvent() {
+	var communityMemberVisible = false;
+
+	$("#communityMemberSummoner").click(function() {
+		if (communityMemberVisible) {
+			$("#communityMemberArea").css("bottom", "-500px");
+		} else {
+			$("#communityMemberArea").css("bottom", "10px");
+		}
+		communityMemberVisible = !communityMemberVisible;
+	});
+}
 
 
 
@@ -115,5 +127,6 @@ $(function(){
 	connectMenuSummonEvent();
 	connectSNSWriteFormSummonEvent();
 	connectSNSSearchFormSummonEvent();
-	connectDRUploadFormSummonEvent()
+	connectDRUploadFormSummonEvent();
+	connectCommunityMemberSummonEvent();
 });

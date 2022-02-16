@@ -94,3 +94,15 @@ create sequence pj_gallery_seq;
 
 select * from pj_gallery;
 
+-----------------------------------------------------------------
+
+create table pj_community(
+	c_no number(5) primary key,
+	c_from varchar2(10 char) not null,
+	c_to varchar2(10 char) not null,
+	c_txt varchar2(200 char) not null,
+	c_when date not null
+);
+create sequence pj_community_seq;
+
+select * from PJ_COMMUNITY;

@@ -47,6 +47,7 @@
 				<beans:value>classpath:snsMapper.xml</beans:value>
 				<beans:value>classpath:dataRoomMapper.xml</beans:value>
 				<beans:value>classpath:galleryMapper.xml</beans:value>
+				<beans:value>classpath:communityMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
