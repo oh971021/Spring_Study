@@ -153,7 +153,6 @@
 			<version>3.5.4</version>
 		</dependency>
 
-		<!-- Spring환경에서 MyBatis쓸 수 있게 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
